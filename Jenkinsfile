@@ -11,6 +11,7 @@ pipeline {
     stage('Build') {
       steps {
         unstash 'venv'
+        sh 'pwd'
         sh 'venv/bin/sam build'
         stash includes: '**/.aws-sam/**/*', name: 'aws-sam'
       }
