@@ -3,6 +3,7 @@ pipeline {
   environment {
     PIPELINE_USER_CREDENTIAL_ID = 'dolly-keys'
     SAM_TEMPLATE = 'template.yaml'
+    SAM_BUCKET = 'sam-pipe'
     MAIN_BRANCH = 'main'
     TESTING_STACK_NAME = 'sam-app2'
     TESTING_PIPELINE_EXECUTION_ROLE = 'arn:aws:iam::440393989684:role/aws-sam-cli-managed-dev-pipe-PipelineExecutionRole-7MYYMG6C6ZK1'
@@ -46,7 +47,7 @@ pipeline {
        // }
       //}
       steps {
-        sh 'sam build'
+        sh 'sam build --template ${SAM_TEMPLATE} --s3-bucket ${SAM_BUCKET}'
         withAWS(
             credentials: env.PIPELINE_USER_CREDENTIAL_ID,
             region: env.TESTING_REGION,
@@ -75,7 +76,7 @@ pipeline {
        // }
      // }
       steps {
-        sh 'sam build'
+        sh 'sam build --template ${SAM_TEMPLATE} --s3-bucket <sam-pipe>'
         withAWS(
             credentials: env.PIPELINE_USER_CREDENTIAL_ID,
             region: env.TESTING_REGION,
