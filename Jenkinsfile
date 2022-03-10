@@ -39,12 +39,12 @@ pipeline {
       when {
         branch 'feature*'
       }
-      agent {
-        docker {
-          image 'public.ecr.aws/sam/build-provided'
+      //agent {
+       // docker {
+        //  image 'public.ecr.aws/sam/build-provided'
           args '--user 0:0 -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-      }
+       // }
+      //}
       steps {
         sh 'sam build --template ${SAM_TEMPLATE} --use-container'
         withAWS(
@@ -68,12 +68,12 @@ pipeline {
       when {
         branch env.MAIN_BRANCH
       }
-      agent {
-        docker {
-          image 'public.ecr.aws/sam/build-provided'
-          args '--user 0:0 -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-      }
+      //agent {
+       // docker {
+         // image 'public.ecr.aws/sam/build-provided'
+         // args '--user 0:0 -v /var/run/docker.sock:/var/run/docker.sock'
+       // }
+     // }
       steps {
         sh 'sam build --template ${SAM_TEMPLATE} --use-container'
         withAWS(
@@ -111,11 +111,11 @@ pipeline {
       when {
         branch env.MAIN_BRANCH
       }
-      agent {
-        docker {
-          image 'public.ecr.aws/sam/build-provided'
-        }
-      }
+      //agent {
+       // docker {
+        //  image 'public.ecr.aws/sam/build-provided'
+       // }
+     // }
       steps {
         withAWS(
             credentials: env.PIPELINE_USER_CREDENTIAL_ID,
@@ -151,11 +151,11 @@ pipeline {
       when {
         branch env.MAIN_BRANCH
       }
-      agent {
-        docker {
-          image 'public.ecr.aws/sam/build-provided'
-        }
-      }
+     // agent {
+      //  docker {
+       //   image 'public.ecr.aws/sam/build-provided'
+       // }
+     // }
       steps {
         // uncomment this to have a manual approval step before deployment to production
         // timeout(time: 24, unit: 'HOURS') {
