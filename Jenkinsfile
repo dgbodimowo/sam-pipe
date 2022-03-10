@@ -47,10 +47,11 @@ pipeline {
        // }
       //}
       steps {
-        sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'
-        stash includes: '**/venv/**/*', name: 'venv'
-        unstash 'venv'
-        sh 'venv/bin/sam build'        
+        sh 'pwd'
+        //sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'
+        //stash includes: '**/venv/**/*', name: 'venv'
+        //unstash 'venv'
+        //sh 'venv/bin/sam build'        
         withAWS(
             credentials: env.PIPELINE_USER_CREDENTIAL_ID,
             region: env.TESTING_REGION,
