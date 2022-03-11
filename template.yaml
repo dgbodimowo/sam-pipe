@@ -7,7 +7,7 @@ Resources:
       Runtime: python3.6
       Handler: index.handler
       CodeUri: 
-        Bucket: dolapoicf34
+        Bucket: tobilee12
         Key: TransactionProcess2-a7d54be3-5b1c-4045-b26d-7a2ccdc482a3.zip
         MyS3Upload:
           Type: S3
