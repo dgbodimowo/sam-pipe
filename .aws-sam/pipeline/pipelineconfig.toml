@@ -11,6 +11,7 @@ pipeline_execution_role = "arn:aws:iam::440393989684:role/aws-sam-cli-managed-de
 cloudformation_execution_role = "arn:aws:iam::440393989684:role/aws-sam-cli-managed-dev-p-CloudFormationExecutionR-1WYDLULNT3YP5"
 artifacts_bucket = "aws-sam-cli-managed-dev-pipeline-artifactsbucket-1smze1tpot7ac"
 image_repository = ""
+CodeUri = "tobilee12"
 region = "us-east-1"
 
 [stage]
