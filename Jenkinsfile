@@ -35,23 +35,8 @@ pipeline {
     // }
 
     stage('build-and-deploy-feature') {
-      // this stage is triggered only for feature branches (feature*),
-      // which will build the stack and deploy to a stack named with branch name.
-     // when {
-     //   branch 'feature*'
-     // }
-      //agent {
-       // docker {
-        //  image 'public.ecr.aws/sam/build-provided'
-         // args '--user 0:0 -v /var/run/docker.sock:/var/run/docker.sock'
-       // }
-      //}
       steps {
-        sh 'sam build'
-        //sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'
-        //stash includes: '**/venv/**/*', name: 'venv'
-        //unstash 'venv'
-        //sh 'venv/bin/sam build'        
+        sh 'sam build'        
         withAWS(
             credentials: env.PIPELINE_USER_CREDENTIAL_ID,
             region: env.TESTING_REGION,
@@ -59,28 +44,11 @@ pipeline {
             roleSessionName: 'deploying-feature') {
           
           sh 'sam deploy --stack-name dolapo27 -t template.yaml --s3-bucket tobilee12 --capabilities CAPABILITY_IAM'
-          //sh '''
-          //  sam deploy --stack-name $(echo ${BRANCH_NAME} | tr -cd '[a-zA-Z0-9-]') \
-            //  --capabilities CAPABILITY_IAM \
-             // --region ${TESTING_REGION} \
-             // --s3-bucket ${TESTING_ARTIFACTS_BUCKET} \
-             // --no-fail-on-empty-changeset \
-            //  --role-arn ${TESTING_CLOUDFORMATION_EXECUTION_ROLE}
-         // '''
         }
       }
     }
 
     stage('build-and-package') {
-     // when {
-       // branch env.MAIN_BRANCH
-     // }
-      //agent {
-       // docker {
-         // image 'public.ecr.aws/sam/build-provided'
-         // args '--user 0:0 -v /var/run/docker.sock:/var/run/docker.sock'
-       // }
-     // }
       steps {
         sh 'python3 -m venv venv && venv/bin/pip install aws-sam-cli'
         stash includes: '**/venv/**/*', name: 'venv'
